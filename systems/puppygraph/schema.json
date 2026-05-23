@@ -1,0 +1,2407 @@
+{
+  "catalogs": [
+    {
+      "name": "demo",
+      "type": "iceberg",
+      "metastore": {
+        "type": "rest",
+        "uri": "http://iceberg-rest:8181",
+        "enableIcebergMetaCache": "true",
+        "icebergMetaCacheTTL": "180"
+      },
+      "storage": {
+        "useInstanceProfile": "false",
+        "accessKey": "admin",
+        "secretKey": "password",
+        "enableSsl": "false",
+        "endpoint": "http://minio:9000",
+        "enablePathStyleAccess": "true",
+        "type": "S3"
+      }
+    }
+  ],
+  "graph": {
+    "vertices": [
+      {
+        "label": "comment",
+        "oneToOne": {
+          "tableSource": {
+            "catalog": "demo",
+            "schema": "mydb",
+            "table": "comment"
+          },
+          "id": {
+            "fields": [
+              {
+                "type": "LONG",
+                "field": "id",
+                "alias": "puppy_id_id"
+              }
+            ]
+          },
+          "attributes": [
+            {
+              "type": "LONG",
+              "field": "id",
+              "alias": "id"
+            },
+            {
+              "type": "DATETIME",
+              "field": "creation_date",
+              "alias": "creation_date"
+            },
+            {
+              "type": "STRING",
+              "field": "location_ip",
+              "alias": "location_ip"
+            },
+            {
+              "type": "STRING",
+              "field": "browser_used",
+              "alias": "browser_used"
+            },
+            {
+              "type": "STRING",
+              "field": "content",
+              "alias": "content"
+            },
+            {
+              "type": "LONG",
+              "field": "length",
+              "alias": "length"
+            }
+          ]
+        }
+      },
+      {
+        "label": "forum",
+        "oneToOne": {
+          "tableSource": {
+            "catalog": "demo",
+            "schema": "mydb",
+            "table": "forum"
+          },
+          "id": {
+            "fields": [
+              {
+                "type": "LONG",
+                "field": "id",
+                "alias": "puppy_id_id"
+              }
+            ]
+          },
+          "attributes": [
+            {
+              "type": "LONG",
+              "field": "id",
+              "alias": "id"
+            },
+            {
+              "type": "DATETIME",
+              "field": "creation_date",
+              "alias": "creation_date"
+            },
+            {
+              "type": "STRING",
+              "field": "title",
+              "alias": "title"
+            }
+          ]
+        }
+      },
+      {
+        "label": "organisation",
+        "oneToOne": {
+          "tableSource": {
+            "catalog": "demo",
+            "schema": "mydb",
+            "table": "organisation"
+          },
+          "id": {
+            "fields": [
+              {
+                "type": "LONG",
+                "field": "id",
+                "alias": "puppy_id_id"
+              }
+            ]
+          },
+          "attributes": [
+            {
+              "type": "LONG",
+              "field": "id",
+              "alias": "id"
+            },
+            {
+              "type": "STRING",
+              "field": "type",
+              "alias": "type"
+            },
+            {
+              "type": "STRING",
+              "field": "name",
+              "alias": "name"
+            },
+            {
+              "type": "STRING",
+              "field": "url",
+              "alias": "url"
+            }
+          ]
+        }
+      },
+      {
+        "label": "person",
+        "oneToOne": {
+          "tableSource": {
+            "catalog": "demo",
+            "schema": "mydb",
+            "table": "person"
+          },
+          "id": {
+            "fields": [
+              {
+                "type": "LONG",
+                "field": "id",
+                "alias": "puppy_id_id"
+              }
+            ]
+          },
+          "attributes": [
+            {
+              "type": "LONG",
+              "field": "id",
+              "alias": "id"
+            },
+            {
+              "type": "DATETIME",
+              "field": "creation_date",
+              "alias": "creation_date"
+            },
+            {
+              "type": "STRING",
+              "field": "first_name",
+              "alias": "first_name"
+            },
+            {
+              "type": "STRING",
+              "field": "last_name",
+              "alias": "last_name"
+            },
+            {
+              "type": "STRING",
+              "field": "gender",
+              "alias": "gender"
+            },
+            {
+              "type": "DATETIME",
+              "field": "birthday",
+              "alias": "birthday"
+            },
+            {
+              "type": "STRING",
+              "field": "location_ip",
+              "alias": "location_ip"
+            },
+            {
+              "type": "STRING",
+              "field": "browser_used",
+              "alias": "browser_used"
+            },
+            {
+              "type": "STRING",
+              "field": "language",
+              "alias": "language"
+            },
+            {
+              "type": "STRING",
+              "field": "email",
+              "alias": "email"
+            }
+          ]
+        }
+      },
+      {
+        "label": "place",
+        "oneToOne": {
+          "tableSource": {
+            "catalog": "demo",
+            "schema": "mydb",
+            "table": "place"
+          },
+          "id": {
+            "fields": [
+              {
+                "type": "LONG",
+                "field": "id",
+                "alias": "puppy_id_id"
+              }
+            ]
+          },
+          "attributes": [
+            {
+              "type": "LONG",
+              "field": "id",
+              "alias": "id"
+            },
+            {
+              "type": "STRING",
+              "field": "name",
+              "alias": "name"
+            },
+            {
+              "type": "STRING",
+              "field": "url",
+              "alias": "url"
+            },
+            {
+              "type": "STRING",
+              "field": "type",
+              "alias": "type"
+            }
+          ]
+        }
+      },
+      {
+        "label": "post",
+        "oneToOne": {
+          "tableSource": {
+            "catalog": "demo",
+            "schema": "mydb",
+            "table": "post"
+          },
+          "id": {
+            "fields": [
+              {
+                "type": "LONG",
+                "field": "id",
+                "alias": "puppy_id_id"
+              }
+            ]
+          },
+          "attributes": [
+            {
+              "type": "LONG",
+              "field": "id",
+              "alias": "id"
+            },
+            {
+              "type": "DATETIME",
+              "field": "creation_date",
+              "alias": "creation_date"
+            },
+            {
+              "type": "STRING",
+              "field": "image_file",
+              "alias": "image_file"
+            },
+            {
+              "type": "STRING",
+              "field": "location_ip",
+              "alias": "location_ip"
+            },
+            {
+              "type": "STRING",
+              "field": "browser_used",
+              "alias": "browser_used"
+            },
+            {
+              "type": "STRING",
+              "field": "language",
+              "alias": "language"
+            },
+            {
+              "type": "STRING",
+              "field": "content",
+              "alias": "content"
+            },
+            {
+              "type": "LONG",
+              "field": "length",
+              "alias": "length"
+            }
+          ]
+        }
+      },
+      {
+        "label": "tag",
+        "oneToOne": {
+          "tableSource": {
+            "catalog": "demo",
+            "schema": "mydb",
+            "table": "tag"
+          },
+          "id": {
+            "fields": [
+              {
+                "type": "LONG",
+                "field": "id",
+                "alias": "puppy_id_id"
+              }
+            ]
+          },
+          "attributes": [
+            {
+              "type": "LONG",
+              "field": "id",
+              "alias": "id"
+            },
+            {
+              "type": "STRING",
+              "field": "name",
+              "alias": "name"
+            },
+            {
+              "type": "STRING",
+              "field": "url",
+              "alias": "url"
+            }
+          ]
+        }
+      },
+      {
+        "label": "tagclass",
+        "oneToOne": {
+          "tableSource": {
+            "catalog": "demo",
+            "schema": "mydb",
+            "table": "tagclass"
+          },
+          "id": {
+            "fields": [
+              {
+                "type": "LONG",
+                "field": "id",
+                "alias": "puppy_id_id"
+              }
+            ]
+          },
+          "attributes": [
+            {
+              "type": "LONG",
+              "field": "id",
+              "alias": "id"
+            },
+            {
+              "type": "STRING",
+              "field": "name",
+              "alias": "name"
+            },
+            {
+              "type": "STRING",
+              "field": "url",
+              "alias": "url"
+            }
+          ]
+        }
+      }
+    ],
+    "edges": [
+      {
+        "label": "comment_hascreator_person",
+        "fromVertex": "comment",
+        "toVertex": "person",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "comment_hascreator_person"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "comment_id",
+              "alias": "puppy_from_comment_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_to_person_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "comment_id",
+            "alias": "comment_id"
+          },
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "comment_hastag_tag",
+        "fromVertex": "comment",
+        "toVertex": "tag",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "comment_hastag_tag"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "comment_id",
+              "alias": "puppy_from_comment_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "tag_id",
+              "alias": "puppy_to_tag_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "comment_id",
+            "alias": "comment_id"
+          },
+          {
+            "type": "LONG",
+            "field": "tag_id",
+            "alias": "tag_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "comment_islocatedin_country",
+        "fromVertex": "comment",
+        "toVertex": "place",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "comment_islocatedin_country"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "comment_id",
+              "alias": "puppy_from_comment_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "country_id",
+              "alias": "puppy_to_country_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "comment_id",
+            "alias": "comment_id"
+          },
+          {
+            "type": "LONG",
+            "field": "country_id",
+            "alias": "country_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "comment_replyof_comment",
+        "fromVertex": "comment",
+        "toVertex": "comment",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "comment_replyof_comment"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "comment1_id",
+              "alias": "puppy_from_comment1_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "comment2_id",
+              "alias": "puppy_to_comment2_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "comment1_id",
+            "alias": "comment1_id"
+          },
+          {
+            "type": "LONG",
+            "field": "comment2_id",
+            "alias": "comment2_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "comment_replyof_post",
+        "fromVertex": "comment",
+        "toVertex": "post",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "comment_replyof_post"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "comment_id",
+              "alias": "puppy_from_comment_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "post_id",
+              "alias": "puppy_to_post_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "comment_id",
+            "alias": "comment_id"
+          },
+          {
+            "type": "LONG",
+            "field": "post_id",
+            "alias": "post_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "forum_containerof_post",
+        "fromVertex": "forum",
+        "toVertex": "post",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "forum_containerof_post"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "forum_id",
+              "alias": "puppy_from_forum_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "post_id",
+              "alias": "puppy_to_post_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "forum_id",
+            "alias": "forum_id"
+          },
+          {
+            "type": "LONG",
+            "field": "post_id",
+            "alias": "post_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "forum_hasmember_person",
+        "fromVertex": "forum",
+        "toVertex": "person",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "forum_hasmember_person"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "forum_id",
+              "alias": "puppy_from_forum_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_to_person_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "forum_id",
+            "alias": "forum_id"
+          },
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "forum_hasmoderator_person",
+        "fromVertex": "forum",
+        "toVertex": "person",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "forum_hasmoderator_person"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "forum_id",
+              "alias": "puppy_from_forum_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_to_person_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "forum_id",
+            "alias": "forum_id"
+          },
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "forum_hastag_tag",
+        "fromVertex": "forum",
+        "toVertex": "tag",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "forum_hastag_tag"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "forum_id",
+              "alias": "puppy_from_forum_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "tag_id",
+              "alias": "puppy_to_tag_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "forum_id",
+            "alias": "forum_id"
+          },
+          {
+            "type": "LONG",
+            "field": "tag_id",
+            "alias": "tag_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "organisation_islocatedin_place",
+        "fromVertex": "organisation",
+        "toVertex": "place",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "organisation_islocatedin_place"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "organisation_id",
+              "alias": "puppy_from_organisation_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "place_id",
+              "alias": "puppy_to_place_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "organisation_id",
+            "alias": "organisation_id"
+          },
+          {
+            "type": "LONG",
+            "field": "place_id",
+            "alias": "place_id"
+          }
+        ]
+      },
+      {
+        "label": "person_hasinterest_tag",
+        "fromVertex": "person",
+        "toVertex": "tag",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "person_hasinterest_tag"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_from_person_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "interest_id",
+              "alias": "puppy_to_interest_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "LONG",
+            "field": "interest_id",
+            "alias": "interest_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "person_islocatedin_city",
+        "fromVertex": "person",
+        "toVertex": "place",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "person_islocatedin_city"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_from_person_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "city_id",
+              "alias": "puppy_to_city_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "LONG",
+            "field": "city_id",
+            "alias": "city_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "person_knows_person",
+        "fromVertex": "person",
+        "toVertex": "person",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "person_knows_person"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person1_id",
+              "alias": "puppy_from_person1_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person2_id",
+              "alias": "puppy_to_person2_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "person1_id",
+            "alias": "person1_id"
+          },
+          {
+            "type": "LONG",
+            "field": "person2_id",
+            "alias": "person2_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "person_likes_comment",
+        "fromVertex": "person",
+        "toVertex": "comment",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "person_likes_comment"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_from_person_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "comment_id",
+              "alias": "puppy_to_comment_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "LONG",
+            "field": "comment_id",
+            "alias": "comment_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "person_likes_post",
+        "fromVertex": "person",
+        "toVertex": "post",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "person_likes_post"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_from_person_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "post_id",
+              "alias": "puppy_to_post_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "LONG",
+            "field": "post_id",
+            "alias": "post_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "person_studyat_university",
+        "fromVertex": "person",
+        "toVertex": "organisation",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "person_studyat_university"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_from_person_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "university_id",
+              "alias": "puppy_to_university_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "LONG",
+            "field": "university_id",
+            "alias": "university_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          },
+          {
+            "type": "LONG",
+            "field": "class_year",
+            "alias": "class_year"
+          }
+        ]
+      },
+      {
+        "label": "person_workat_company",
+        "fromVertex": "person",
+        "toVertex": "organisation",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "person_workat_company"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_from_person_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "company_id",
+              "alias": "puppy_to_company_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "LONG",
+            "field": "company_id",
+            "alias": "company_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          },
+          {
+            "type": "LONG",
+            "field": "work_from",
+            "alias": "work_from"
+          }
+        ]
+      },
+      {
+        "label": "place_ispartof_place",
+        "fromVertex": "place",
+        "toVertex": "place",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "place_ispartof_place"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "place1_id",
+              "alias": "puppy_from_place1_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "place2_id",
+              "alias": "puppy_to_place2_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "place1_id",
+            "alias": "place1_id"
+          },
+          {
+            "type": "LONG",
+            "field": "place2_id",
+            "alias": "place2_id"
+          }
+        ]
+      },
+      {
+        "label": "post_hascreator_person",
+        "fromVertex": "post",
+        "toVertex": "person",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "post_hascreator_person"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "post_id",
+              "alias": "puppy_from_post_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_to_person_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "post_id",
+            "alias": "post_id"
+          },
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "post_hastag_tag",
+        "fromVertex": "post",
+        "toVertex": "tag",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "post_hastag_tag"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "post_id",
+              "alias": "puppy_from_post_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "tag_id",
+              "alias": "puppy_to_tag_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "post_id",
+            "alias": "post_id"
+          },
+          {
+            "type": "LONG",
+            "field": "tag_id",
+            "alias": "tag_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "post_islocatedin_country",
+        "fromVertex": "post",
+        "toVertex": "place",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "post_islocatedin_country"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "post_id",
+              "alias": "puppy_from_post_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "country_id",
+              "alias": "puppy_to_country_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "post_id",
+            "alias": "post_id"
+          },
+          {
+            "type": "LONG",
+            "field": "country_id",
+            "alias": "country_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "tag_hastype_tagclass",
+        "fromVertex": "tag",
+        "toVertex": "tagclass",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "tag_hastype_tagclass"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "tag_id",
+              "alias": "puppy_from_tag_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "tagclass_id",
+              "alias": "puppy_to_tagclass_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "tag_id",
+            "alias": "tag_id"
+          },
+          {
+            "type": "LONG",
+            "field": "tagclass_id",
+            "alias": "tagclass_id"
+          }
+        ]
+      },
+      {
+        "label": "tagclass_issubclassof_tagclass",
+        "fromVertex": "tagclass",
+        "toVertex": "tagclass",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "tagclass_issubclassof_tagclass"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "tagclass1_id",
+              "alias": "puppy_from_tagclass1_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "tagclass2_id",
+              "alias": "puppy_to_tagclass2_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "tagclass1_id",
+            "alias": "tagclass1_id"
+          },
+          {
+            "type": "LONG",
+            "field": "tagclass2_id",
+            "alias": "tagclass2_id"
+          }
+        ]
+      },
+      {
+        "label": "comment_hascreator_person_reverse",
+        "fromVertex": "person",
+        "toVertex": "comment",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "comment_hascreator_person"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_from_person_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "comment_id",
+              "alias": "puppy_to_comment_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "comment_id",
+            "alias": "comment_id"
+          },
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "comment_hastag_tag_reverse",
+        "fromVertex": "tag",
+        "toVertex": "comment",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "comment_hastag_tag"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "tag_id",
+              "alias": "puppy_from_tag_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "comment_id",
+              "alias": "puppy_to_comment_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "comment_id",
+            "alias": "comment_id"
+          },
+          {
+            "type": "LONG",
+            "field": "tag_id",
+            "alias": "tag_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "comment_islocatedin_country_reverse",
+        "fromVertex": "place",
+        "toVertex": "comment",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "comment_islocatedin_country"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "country_id",
+              "alias": "puppy_from_country_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "comment_id",
+              "alias": "puppy_to_comment_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "comment_id",
+            "alias": "comment_id"
+          },
+          {
+            "type": "LONG",
+            "field": "country_id",
+            "alias": "country_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "comment_replyof_comment_reverse",
+        "fromVertex": "comment",
+        "toVertex": "comment",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "comment_replyof_comment"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "comment2_id",
+              "alias": "puppy_from_comment2_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "comment1_id",
+              "alias": "puppy_to_comment1_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "comment1_id",
+            "alias": "comment1_id"
+          },
+          {
+            "type": "LONG",
+            "field": "comment2_id",
+            "alias": "comment2_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "comment_replyof_post_reverse",
+        "fromVertex": "post",
+        "toVertex": "comment",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "comment_replyof_post"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "post_id",
+              "alias": "puppy_from_post_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "comment_id",
+              "alias": "puppy_to_comment_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "comment_id",
+            "alias": "comment_id"
+          },
+          {
+            "type": "LONG",
+            "field": "post_id",
+            "alias": "post_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "forum_containerof_post_reverse",
+        "fromVertex": "post",
+        "toVertex": "forum",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "forum_containerof_post"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "post_id",
+              "alias": "puppy_from_post_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "forum_id",
+              "alias": "puppy_to_forum_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "forum_id",
+            "alias": "forum_id"
+          },
+          {
+            "type": "LONG",
+            "field": "post_id",
+            "alias": "post_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "forum_hasmember_person_reverse",
+        "fromVertex": "person",
+        "toVertex": "forum",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "forum_hasmember_person"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_from_person_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "forum_id",
+              "alias": "puppy_to_forum_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "forum_id",
+            "alias": "forum_id"
+          },
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "forum_hasmoderator_person_reverse",
+        "fromVertex": "person",
+        "toVertex": "forum",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "forum_hasmoderator_person"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_from_person_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "forum_id",
+              "alias": "puppy_to_forum_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "forum_id",
+            "alias": "forum_id"
+          },
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "forum_hastag_tag_reverse",
+        "fromVertex": "tag",
+        "toVertex": "forum",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "forum_hastag_tag"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "tag_id",
+              "alias": "puppy_from_tag_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "forum_id",
+              "alias": "puppy_to_forum_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "forum_id",
+            "alias": "forum_id"
+          },
+          {
+            "type": "LONG",
+            "field": "tag_id",
+            "alias": "tag_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "organisation_islocatedin_place_reverse",
+        "fromVertex": "place",
+        "toVertex": "organisation",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "organisation_islocatedin_place"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "place_id",
+              "alias": "puppy_from_place_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "organisation_id",
+              "alias": "puppy_to_organisation_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "organisation_id",
+            "alias": "organisation_id"
+          },
+          {
+            "type": "LONG",
+            "field": "place_id",
+            "alias": "place_id"
+          }
+        ]
+      },
+      {
+        "label": "person_hasinterest_tag_reverse",
+        "fromVertex": "tag",
+        "toVertex": "person",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "person_hasinterest_tag"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "interest_id",
+              "alias": "puppy_from_interest_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_to_person_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "LONG",
+            "field": "interest_id",
+            "alias": "interest_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "person_islocatedin_city_reverse",
+        "fromVertex": "person",
+        "toVertex": "person",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "person_islocatedin_city"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "city_id",
+              "alias": "puppy_from_city_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_to_person_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "LONG",
+            "field": "city_id",
+            "alias": "city_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "person_likes_comment_reverse",
+        "fromVertex": "comment",
+        "toVertex": "person",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "person_likes_comment"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "comment_id",
+              "alias": "puppy_from_comment_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_to_person_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "LONG",
+            "field": "comment_id",
+            "alias": "comment_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "person_likes_post_reverse",
+        "fromVertex": "post",
+        "toVertex": "person",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "person_likes_post"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "post_id",
+              "alias": "puppy_from_post_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_to_person_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "LONG",
+            "field": "post_id",
+            "alias": "post_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "person_studyat_university_reverse",
+        "fromVertex": "organisation",
+        "toVertex": "person",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "person_studyat_university"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "university_id",
+              "alias": "puppy_from_university_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_to_person_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "LONG",
+            "field": "university_id",
+            "alias": "university_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          },
+          {
+            "type": "LONG",
+            "field": "class_year",
+            "alias": "class_year"
+          }
+        ]
+      },
+      {
+        "label": "person_workat_company_reverse",
+        "fromVertex": "organisation",
+        "toVertex": "person",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "person_workat_company"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "company_id",
+              "alias": "puppy_from_company_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_to_person_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "LONG",
+            "field": "company_id",
+            "alias": "company_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          },
+          {
+            "type": "LONG",
+            "field": "work_from",
+            "alias": "work_from"
+          }
+        ]
+      },
+      {
+        "label": "place_ispartof_place_reverse",
+        "fromVertex": "place",
+        "toVertex": "place",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "place_ispartof_place"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "place2_id",
+              "alias": "puppy_from_place2_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "place1_id",
+              "alias": "puppy_to_place1_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "place1_id",
+            "alias": "place1_id"
+          },
+          {
+            "type": "LONG",
+            "field": "place2_id",
+            "alias": "place2_id"
+          }
+        ]
+      },
+      {
+        "label": "post_hascreator_person_reverse",
+        "fromVertex": "person",
+        "toVertex": "post",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "post_hascreator_person"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "person_id",
+              "alias": "puppy_from_person_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "post_id",
+              "alias": "puppy_to_post_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "post_id",
+            "alias": "post_id"
+          },
+          {
+            "type": "LONG",
+            "field": "person_id",
+            "alias": "person_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "post_hastag_tag_reverse",
+        "fromVertex": "tag",
+        "toVertex": "post",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "post_hastag_tag"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "tag_id",
+              "alias": "puppy_from_tag_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "post_id",
+              "alias": "puppy_to_post_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "post_id",
+            "alias": "post_id"
+          },
+          {
+            "type": "LONG",
+            "field": "tag_id",
+            "alias": "tag_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "post_islocatedin_country_reverse",
+        "fromVertex": "place",
+        "toVertex": "post",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "post_islocatedin_country"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "country_id",
+              "alias": "puppy_from_country_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "post_id",
+              "alias": "puppy_to_post_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "post_id",
+            "alias": "post_id"
+          },
+          {
+            "type": "LONG",
+            "field": "country_id",
+            "alias": "country_id"
+          },
+          {
+            "type": "DATETIME",
+            "field": "creation_date",
+            "alias": "creation_date"
+          }
+        ]
+      },
+      {
+        "label": "tag_hastype_tagclass_reverse",
+        "fromVertex": "tagclass",
+        "toVertex": "tag",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "tag_hastype_tagclass"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "tagclass_id",
+              "alias": "puppy_from_tagclass_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "tag_id",
+              "alias": "puppy_to_tag_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "tag_id",
+            "alias": "tag_id"
+          },
+          {
+            "type": "LONG",
+            "field": "tagclass_id",
+            "alias": "tagclass_id"
+          }
+        ]
+      },
+      {
+        "label": "tagclass_issubclassof_tagclass_reverse",
+        "fromVertex": "tagclass",
+        "toVertex": "tagclass",
+        "tableSource": {
+          "catalog": "demo",
+          "schema": "mydb",
+          "table": "tagclass_issubclassof_tagclass"
+        },
+        "fromId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "tagclass2_id",
+              "alias": "puppy_from_tagclass2_id"
+            }
+          ]
+        },
+        "toId": {
+          "fields": [
+            {
+              "type": "LONG",
+              "field": "tagclass1_id",
+              "alias": "puppy_to_tagclass1_id"
+            }
+          ]
+        },
+        "attributes": [
+          {
+            "type": "LONG",
+            "field": "tagclass1_id",
+            "alias": "tagclass1_id"
+          },
+          {
+            "type": "LONG",
+            "field": "tagclass2_id",
+            "alias": "tagclass2_id"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+# exp0 minimal graph: Comment, Person, COMMENT_HASCREATOR_PERSON only.
+CREATE VERTEX Comment (
+  PRIMARY_ID id UINT,
+  creationDate INT,
+  locationIP STRING,
+  browserUsed STRING,
+  content STRING,
+  length UINT
+) WITH primary_id_as_attribute="TRUE"
+
+CREATE VERTEX Person (
+  PRIMARY_ID id UINT,
+  creationDate INT,
+  firstName STRING,
+  lastName STRING,
+  gender STRING,
+  birthday DATETIME,
+  locationIP STRING,
+  browserUsed STRING,
+  language STRING,
+  email STRING
+) WITH primary_id_as_attribute="TRUE"
+
+CREATE DIRECTED EDGE COMMENT_HASCREATOR_PERSON (
+  FROM Comment, TO Person, creationDate INT
+) WITH REVERSE_EDGE="COMMENT_HASCREATOR_PERSON_REVERSE"
+
+CREATE GRAPH ldbc_snb (*)

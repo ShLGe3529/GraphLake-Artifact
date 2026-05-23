@@ -1,0 +1,27 @@
+# Neo4j baseline — ephemeral: docker compose up for queries, down to free RAM.
+# Requires CSV export under dataset/exports/neo4j/ (see dataset/run_ingest.sh neo4j).
+
+services:
+  neo4j:
+    image: neo4j:latest
+    container_name: neo4j-baseline
+    networks:
+      - lakehouse-net
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      NEO4J_AUTH: neo4j/password
+      # Tune down for 64GB artifact hosts (override via compose env if needed)
+      NEO4J_server_memory_pagecache_size: ${NEO4J_PAGECACHE:-8G}
+      NEO4J_server_memory_heap_initial__size: ${NEO4J_HEAP:-8G}
+      NEO4J_server_memory_heap_max__size: ${NEO4J_HEAP:-8G}
+    volumes:
+      - ./data:/data
+      - ./queries:/query
+      - ../../dataset/exports/neo4j:/import/csv:ro
+
+networks:
+  lakehouse-net:
+    external: true
+    name: lakehouse-net

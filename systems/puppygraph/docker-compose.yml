@@ -1,0 +1,22 @@
+services:
+  puppygraph:
+    image: puppygraph/puppygraph:stable
+    container_name: puppygraph-baseline
+    networks:
+      - lakehouse-net
+    ports:
+      - "8081:8081"
+      - "8182:8182"
+      - "7687:7687"
+    environment:
+      PUPPYGRAPH_PASSWORD: ${PUPPYGRAPH_PASSWORD:-puppygraph123}
+      QUERY_TIMEOUT: ${PUPPYGRAPH_QUERY_TIMEOUT:-5m}
+    volumes:
+      - ./schema.json:/config/schema_mydb.json:ro
+      - ./schema_bi16.json:/config/schema_bi16.json:ro
+      - ./queries:/queries:ro
+
+networks:
+  lakehouse-net:
+    external: true
+    name: lakehouse-net

@@ -1,0 +1,3 @@
+scenario,database,filter_env,loading_time_sec,files_loaded,timestamp
+A,mydb,none,25,34,2026-05-21T17:29:58Z
+B,mydb,GRAPHLAKE_FILTER_COMMENT_HASCREATOR_PERSON=2010-12-01T00:00:00Z,25,24,2026-05-21T17:31:30Z

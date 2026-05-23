@@ -1,0 +1,20 @@
+# Local data (downloaded / generated)
+data/minio-data/
+data/spark-warehouse/
+dataset/raw/
+dataset/exports/
+dataset/logs/
+dataset/.ldbc_scale
+
+# Engine runtime / results
+systems/neo4j/data/
+systems/*/results/
+
+# exp3 archive (optional local copy; keep if you need graph500 scripts)
+# tmp/exp3-archive/
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/

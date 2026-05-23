@@ -1,0 +1,17 @@
+services:
+  trino:
+    image: trinodb/trino:latest
+    container_name: trino-baseline
+    networks:
+      - lakehouse-net
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./catalog:/etc/trino/catalog:ro
+      - ./config.properties:/etc/trino/config.properties:ro
+      - ./queries:/query:ro
+
+networks:
+  lakehouse-net:
+    external: true
+    name: lakehouse-net

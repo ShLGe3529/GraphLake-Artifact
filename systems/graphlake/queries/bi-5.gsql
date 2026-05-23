@@ -1,0 +1,32 @@
+USE GRAPH ldbc_snb
+
+CREATE OR REPLACE QUERY bi5(STRING tag) SYNTAX v2 {
+
+  TYPEDEF TUPLE <UINT personId, UINT replyCount, UINT likeCount, UINT messageCount, UINT score> RESULT;
+
+  HeapAccum<RESULT>(100, score DESC, personId ASC) @@result;
+
+  SumAccum<UINT> @likeCount;
+  SumAccum<UINT> @messageCount;
+  SumAccum<UINT> @replyCount;
+
+  T = SELECT t FROM Tag:t WHERE t.name == tag;
+
+  messages = SELECT m FROM T:t -(COMMENT_HASTAG_TAG_REVERSE>)- (Comment):m;
+  tmp = SELECT m FROM messages:m -(PERSON_LIKES_COMMENT_REVERSE>)- Person:p ACCUM m.@likeCount += 1;
+  tmp = SELECT m FROM messages:m -(COMMENT_REPLYOF_COMMENT_REVERSE>)- Comment:c ACCUM m.@replyCount += 1;
+  tmp =
+    SELECT p
+    FROM messages:m -(COMMENT_HASCREATOR_PERSON>)- Person:p
+    ACCUM
+      p.@replyCount += m.@replyCount,
+      p.@likeCount += m.@likeCount,
+      p.@messageCount += 1
+    POST-ACCUM
+      @@result += RESULT(p.id, p.@replyCount, p.@likeCount, p.@messageCount,
+        p.@messageCount + 2*p.@replyCount + 10*p.@likeCount);
+
+  PRINT @@result as result;
+}
+
+INSTALL QUERY -single bi5

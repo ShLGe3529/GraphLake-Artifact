@@ -1,0 +1,11 @@
+engine,query,database,startup_sec,query_sec,timestamp
+graphlake,bi-2,mydb,26.756,0.99,2026-05-21T18:12:28Z
+graphlake,bi-5,mydb,26.756,0.61,2026-05-21T18:12:28Z
+graphlake,bi-8,mydb,26.756,0.47,2026-05-21T18:12:29Z
+graphlake,bi-13,mydb,26.756,0.42,2026-05-21T18:12:29Z
+graphlake,bi-16,mydb,26.756,0.35,2026-05-21T18:12:29Z
+puppygraph,bi-2,mydb,164,4.25,2026-05-21T18:16:22Z
+puppygraph,bi-5,mydb,164,4.88,2026-05-21T18:16:27Z
+puppygraph,bi-8,mydb,164,43.86,2026-05-21T18:17:11Z
+puppygraph,bi-13,mydb,164,4.28,2026-05-21T18:17:15Z
+puppygraph,bi-16,mydb,164,6.31,2026-05-21T18:17:22Z

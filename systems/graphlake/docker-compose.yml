@@ -1,0 +1,34 @@
+# GraphLake prototype (Zero-ETL over Iceberg).
+# Image: graphlakeproto-sigmod26:latest (see systems/graphlake/README.md)
+
+services:
+  graphlake:
+    image: ${GRAPHLAKE_IMAGE:-graphlakeproto-sigmod26:latest}
+    container_name: graphlake-baseline
+    networks:
+      - lakehouse-net
+    ports:
+      - "14240:14240"
+      - "9000:9000"
+    ulimits:
+      nofile:
+        soft: 1000000
+        hard: 1000000
+    environment:
+      GRAPHLAKE_ICEBERG_NAMESPACE: ${GRAPHLAKE_ICEBERG_NAMESPACE:-mydb}
+      # Per-table pushdown: GRAPHLAKE_FILTER_<TABLE>=<ISO timestamp>  ->  creation_date >= value
+      GRAPHLAKE_FILTER_COMMENT: ${GRAPHLAKE_FILTER_COMMENT:-}
+      GRAPHLAKE_FILTER_POST: ${GRAPHLAKE_FILTER_POST:-}
+      GRAPHLAKE_FILTER_FORUM: ${GRAPHLAKE_FILTER_FORUM:-}
+      GRAPHLAKE_FILTER_PERSON: ${GRAPHLAKE_FILTER_PERSON:-}
+      AWS_ACCESS_KEY_ID: admin
+      AWS_SECRET_ACCESS_KEY: password
+      AWS_REGION: us-east-2
+    volumes:
+      - ./queries:/opt/graphlake/queries:ro
+      - ./conf:/opt/graphlake/conf:ro
+
+networks:
+  lakehouse-net:
+    external: true
+    name: lakehouse-net
