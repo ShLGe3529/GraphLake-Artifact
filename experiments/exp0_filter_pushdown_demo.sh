@@ -7,8 +7,7 @@ REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 RESULT_DIR="${REPO_ROOT}/experiments/results/exp0"
 SUMMARY="${RESULT_DIR}/summary.csv"
 GRAPHLAKE_CONTAINER="${GRAPHLAKE_CONTAINER:-graphlakeproto}"
-GRAPHLAKE_IMAGE="${GRAPHLAKE_IMAGE:-graphlake-artifact:latest}"
-GRAPHLAKE_IMAGE_TAR="${GRAPHLAKE_IMAGE_TAR:-/ssd_root/liu3529/graphlake-artifact.tar}"
+GRAPHLAKE_IMAGE="${GRAPHLAKE_IMAGE:-shlge3529/graphlake-artifact:latest}"
 # Iceberg timestamptz literal needs zone offset (e.g. Z or +00:00), not bare ISO local time.
 FILTER_DATE="${GRAPHLAKE_FILTER_COMMENT_HASCREATOR_PERSON:-2010-12-01T00:00:00Z}"
 LOAD_TIMEOUT_SEC="${GRAPHLAKE_LOAD_TIMEOUT_SEC:-7200}"
@@ -39,12 +38,8 @@ sleep 10
 cd "${REPO_ROOT}"
 
 # -----------------------------------------------------------------------------
-echo "======== Step 2: Load GraphLake image ========"
-docker image inspect "${GRAPHLAKE_IMAGE}" >/dev/null 2>&1 || docker load -i "${GRAPHLAKE_IMAGE_TAR}"
-
-# -----------------------------------------------------------------------------
-echo "======== Step 3: Scenario A — no manifest filter ========"
-echo "Step 3a: docker run ${GRAPHLAKE_CONTAINER} (no filter)"
+echo "======== Step 2: Scenario A — no manifest filter ========"
+echo "Step 2a: docker run ${GRAPHLAKE_CONTAINER} (no filter)"
 docker rm -f "${GRAPHLAKE_CONTAINER}" 2>/dev/null || true
 docker run -d --name "${GRAPHLAKE_CONTAINER}" \
   --network lakehouse-net \
@@ -56,19 +51,19 @@ docker run -d --name "${GRAPHLAKE_CONTAINER}" \
   -e AWS_SECRET_ACCESS_KEY=password \
   -e AWS_REGION=us-east-2 \
   "${GRAPHLAKE_IMAGE}"
-echo "Step 3a2: clear ${GRAPHLAKE_FILTERS_FILE} (no filter)"
+echo "Step 2a2: clear ${GRAPHLAKE_FILTERS_FILE} (no filter)"
 docker exec "${GRAPHLAKE_CONTAINER}" bash -c ": > ${GRAPHLAKE_FILTERS_FILE}"
 echo "gadmin start all, then wait 30s for TigerGraph"
 docker exec -u tigergraph "${GRAPHLAKE_CONTAINER}" "${TG_CMD}/gadmin" start all
 sleep 30
 
-echo "Step 3b: Install exp0 schema (Comment, Person, COMMENT_HASCREATOR_PERSON)"
+echo "Step 2b: Install exp0 schema (Comment, Person, COMMENT_HASCREATOR_PERSON)"
 START_A=$(date +%s)
 docker cp "${SCHEMA_GSQL}" "${GRAPHLAKE_CONTAINER}:/tmp/schema_exp0.gsql"
 docker exec -u tigergraph "${GRAPHLAKE_CONTAINER}" \
   "${TG_CMD}/gsql" "/tmp/schema_exp0.gsql"
 
-echo "Step 3c: Wait for GPE log 'Ready to build edge lists for <N> edge files'"
+echo "Step 2c: Wait for GPE log 'Ready to build edge lists for <N> edge files'"
 ELAPSED_A=0
 FILES_A=NA
 while [ "${ELAPSED_A}" -lt "${LOAD_TIMEOUT_SEC}" ]; do
@@ -90,8 +85,8 @@ docker exec "${MC_CONTAINER}" mc rm -r --force "${MC_MYDB_PATH}"
 docker stop "${GRAPHLAKE_CONTAINER}"
 
 # -----------------------------------------------------------------------------
-echo "======== Step 4: Scenario B — GRAPHLAKE_FILTER_COMMENT_HASCREATOR_PERSON=${FILTER_DATE} ========"
-echo "Step 4a: docker run ${GRAPHLAKE_CONTAINER}"
+echo "======== Step 3: Scenario B — GRAPHLAKE_FILTER_COMMENT_HASCREATOR_PERSON=${FILTER_DATE} ========"
+echo "Step 3a: docker run ${GRAPHLAKE_CONTAINER}"
 docker rm -f "${GRAPHLAKE_CONTAINER}"
 docker run -d --name "${GRAPHLAKE_CONTAINER}" \
   --network lakehouse-net \
@@ -103,20 +98,20 @@ docker run -d --name "${GRAPHLAKE_CONTAINER}" \
   -e AWS_SECRET_ACCESS_KEY=password \
   -e AWS_REGION=us-east-2 \
   "${GRAPHLAKE_IMAGE}"
-echo "Step 4a2: write ${GRAPHLAKE_FILTERS_FILE}"
+echo "Step 3a2: write ${GRAPHLAKE_FILTERS_FILE}"
 docker exec "${GRAPHLAKE_CONTAINER}" bash -c \
   "echo 'GRAPHLAKE_FILTER_COMMENT_HASCREATOR_PERSON=${FILTER_DATE}' > ${GRAPHLAKE_FILTERS_FILE}"
 echo "gadmin start all, then wait 30s for TigerGraph"
 docker exec -u tigergraph "${GRAPHLAKE_CONTAINER}" "${TG_CMD}/gadmin" start all
 sleep 30
 
-echo "Step 4b: Install exp0 schema again"
+echo "Step 3b: Install exp0 schema again"
 START_B=$(date +%s)
 docker cp "${SCHEMA_GSQL}" "${GRAPHLAKE_CONTAINER}:/tmp/schema_exp0.gsql"
 docker exec -u tigergraph "${GRAPHLAKE_CONTAINER}" \
   "${TG_CMD}/gsql" "/tmp/schema_exp0.gsql"
 
-echo "Step 4c: Wait for GPE log 'Ready to build edge lists for <N> edge files'"
+echo "Step 3c: Wait for GPE log 'Ready to build edge lists for <N> edge files'"
 ELAPSED_B=0
 FILES_B=NA
 while [ "${ELAPSED_B}" -lt "${LOAD_TIMEOUT_SEC}" ]; do
@@ -142,6 +137,6 @@ echo "Clear lakehouse data (mc rm ${MC_MYDB_PATH})"
 docker exec "${MC_CONTAINER}" mc rm -r --force "${MC_MYDB_PATH}" || true
 
 # -----------------------------------------------------------------------------
-echo "======== Step 5: Results ========"
+echo "======== Step 4: Results ========"
 cat "${SUMMARY}"
 echo "Wrote ${SUMMARY}"

@@ -6,8 +6,7 @@ REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 RESULT_DIR="${REPO_ROOT}/experiments/results/exp2"
 SUMMARY="${RESULT_DIR}/query_summary.csv"
 GRAPHLAKE_CONTAINER="${GRAPHLAKE_CONTAINER:-graphlakeproto}"
-GRAPHLAKE_IMAGE="${GRAPHLAKE_IMAGE:-graphlake-artifact:latest}"
-GRAPHLAKE_IMAGE_TAR="${GRAPHLAKE_IMAGE_TAR:-/ssd_root/liu3529/graphlake-artifact.tar}"
+GRAPHLAKE_IMAGE="${GRAPHLAKE_IMAGE:-shlge3529/graphlake-artifact:latest}"
 TG_CMD=/home/tigergraph/tigergraph/app/cmd
 GSTORE_CONFIG=/home/tigergraph/tigergraph/data/gstore/0/part/config.yaml
 GRAPHLAKE_FILTERS_FILE=/tmp/graphlake_filters.properties
@@ -44,7 +43,6 @@ cd "${REPO_ROOT}"
 echo "======== Step 2: GraphLake — load schema, patch ActiveCol, install queries ========"
 drop_os_cache
 echo "Step 2a: Load image and start ${GRAPHLAKE_CONTAINER}"
-docker image inspect "${GRAPHLAKE_IMAGE}" >/dev/null 2>&1 || docker load -i "${GRAPHLAKE_IMAGE_TAR}"
 docker rm -f "${GRAPHLAKE_CONTAINER}" 2>/dev/null || true
 docker run -d --name "${GRAPHLAKE_CONTAINER}" \
   --network lakehouse-net \
@@ -60,7 +58,7 @@ docker exec "${GRAPHLAKE_CONTAINER}" bash -c ": > ${GRAPHLAKE_FILTERS_FILE}"
 docker exec -u tigergraph "${GRAPHLAKE_CONTAINER}" "${TG_CMD}/gadmin" start all
 sleep 30
 
-echo "Step 2b: Install full GSQL schema (no -g); startup = GPE Ready to build edge lists"
+echo "Step 2b: Install full GSQL schema (no -g); startup = Build EdgeRefBlocks from GPE log"
 docker cp "${REPO_ROOT}/systems/graphlake/conf/schema_full.gsql" \
   "${GRAPHLAKE_CONTAINER}:/tmp/schema_full.gsql"
 docker exec -u tigergraph "${GRAPHLAKE_CONTAINER}" \

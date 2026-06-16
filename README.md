@@ -48,6 +48,9 @@ sudo bash experiments/exp0_filter_pushdown_demo.sh
 
 Results: `experiments/results/exp0|exp1|exp2/`
 
+If there is a license issue for GraphLake execution, please run
+`docker pull shlge3529/graphlake-artifact:latest` to manually refresh the docker image.
+
 ## Requirements
 
 Linux, Docker Compose v2, `curl`, `zstd`, `tar`, Python 3 + `neo4j` pip package (PuppyGraph).

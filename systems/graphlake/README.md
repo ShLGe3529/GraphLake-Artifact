@@ -4,18 +4,11 @@ Zero-ETL queries over Iceberg on MinIO. Lake queries live under `queries/`; sche
 
 ## Image
 
-```bash
-docker load -i graphlakeproto-sigmod26.tar
-export GRAPHLAKE_IMAGE=graphlakeproto-sigmod26:latest
-```
+The image tag is shlge3529/graphlake-artifact/latest
 
 ## Start (artifact image / exp1–exp2)
 
-```bash
-docker load -i /ssd_root/liu3529/graphlake-artifact.tar
-# exp scripts: docker run graphlake-artifact:latest, gadmin start all,
-# gsql schema (no -g), patch ActiveCol, gadmin restart, then queries.
-```
+The image is automatically downloaded in `docker run`
 
 After lakehouse load, set `ActiveCol` in `~/tigergraph/data/gstore/0/part/config.yaml`:
 

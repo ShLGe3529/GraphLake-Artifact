@@ -11,8 +11,7 @@ RESULT_DIR="${REPO_ROOT}/experiments/results/exp1"
 SUMMARY="${RESULT_DIR}/e2e_bi16_summary.csv"
 GRAPHLAKE_CONTAINER="${GRAPHLAKE_CONTAINER:-graphlakeproto}"
 PUPPYGRAPH_CONTAINER="${PUPPYGRAPH_CONTAINER:-puppygraph-baseline}"
-GRAPHLAKE_IMAGE="${GRAPHLAKE_IMAGE:-graphlake-artifact:latest}"
-GRAPHLAKE_IMAGE_TAR="${GRAPHLAKE_IMAGE_TAR:-/ssd_root/liu3529/graphlake-artifact.tar}"
+GRAPHLAKE_IMAGE="${GRAPHLAKE_IMAGE:-shlge3529/graphlake-artifact:latest}"
 TG_CMD=/home/tigergraph/tigergraph/app/cmd
 GSTORE_CONFIG=/home/tigergraph/tigergraph/data/gstore/0/part/config.yaml
 GRAPHLAKE_FILTERS_FILE=/tmp/graphlake_filters.properties
@@ -50,7 +49,6 @@ cd "${REPO_ROOT}"
 echo "======== Step 2: GraphLake / BI-16 ========"
 drop_os_cache
 echo "Step 2a: Load image and start ${GRAPHLAKE_CONTAINER}"
-docker image inspect "${GRAPHLAKE_IMAGE}" >/dev/null 2>&1 || docker load -i "${GRAPHLAKE_IMAGE_TAR}"
 docker rm -f "${GRAPHLAKE_CONTAINER}" 2>/dev/null || true
 docker run -d --name "${GRAPHLAKE_CONTAINER}" \
   --network lakehouse-net \
