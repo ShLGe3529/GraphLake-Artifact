@@ -216,6 +216,7 @@ while true; do
 done
 echo "startup_sec=${PUPPY_STARTUP_SEC}" >"${PUPPY_RESULT_DIR}/startup_time.txt"
 
+pip3 install neo4j
 for Q in bi-2 bi-5 bi-8 bi-13 bi-16; do
   echo "======== PuppyGraph / ${Q} ========"
   if RESULT_DIR="${PUPPY_RESULT_DIR}" /usr/bin/time -f 'elapsed_sec=%e' \

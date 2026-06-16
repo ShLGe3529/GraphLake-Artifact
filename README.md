@@ -28,6 +28,7 @@ MinIO: http://localhost:9001 (`admin` / `password`), S3 API http://localhost:190
 cd dataset
 ./generate_ldbc.sh
 docker compose -f ../systems/spark/docker-compose.yml up -d
+cd ..
 ```
 
 Each experiment script runs its own **ingest** (`run_ingest.sh standard` or `partitioned`) when you execute it.

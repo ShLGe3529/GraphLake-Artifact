@@ -194,6 +194,7 @@ done
 sleep 300
 
 echo "Step 3d: Run BI-16 Cypher (query time)"
+pip3 install neo4j
 PUPPY_RESULT_DIR="${RESULT_DIR}/puppygraph"
 if RESULT_DIR="${PUPPY_RESULT_DIR}" /usr/bin/time -f 'elapsed_sec=%e' \
   -o "${PUPPY_RESULT_DIR}/${QUERY}_time.txt" \
