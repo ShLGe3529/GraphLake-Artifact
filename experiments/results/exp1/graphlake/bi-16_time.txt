@@ -1,1 +1,1 @@
-elapsed_sec=1.05
+elapsed_sec=3.29

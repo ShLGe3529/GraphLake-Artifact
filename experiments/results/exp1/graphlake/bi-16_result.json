@@ -1,1 +1,1 @@
-{"version":{"edition":"enterprise","api":"v2","schema":0},"error":false,"message":"","results":[{"result":[]}]}
+{"version":{"edition":"enterprise","api":"v2","schema":0},"error":false,"message":"","results":[{"result":[{"personId":13194139672746,"messageCountA":1,"messageCountB":1,"totalMessageCount":2},{"personId":17592186106663,"messageCountA":1,"messageCountB":1,"totalMessageCount":2},{"personId":17592186155868,"messageCountA":1,"messageCountB":1,"totalMessageCount":2},{"personId":28587302756389,"messageCountA":1,"messageCountB":1,"totalMessageCount":2}]}]}

@@ -1,6 +1,6 @@
 engine,query,database,etl_sec,startup_sec,query_sec,timestamp
-graphlake,bi-16,mydb,,17.750,1.05,2026-05-21T17:43:52Z
-puppygraph,bi-16,mydb,,57,fail,2026-05-21T17:50:54Z
-trino,bi-16,mydb,,,45.65,2026-05-21T17:52:13Z
-spark,bi-16,mydb,,,29.79,2026-05-21T17:52:57Z
-neo4j,bi-16,mydb,123.740,,143.43,2026-05-21T17:57:46Z
+graphlake,bi-16,mydb,,37.927,3.29,2026-07-01T21:13:18Z
+puppygraph,bi-16,mydb,,135,13.54,2026-07-01T21:22:48Z
+trino,bi-16,mydb,,,201.04,2026-07-01T21:27:04Z
+spark,bi-16,mydb,,,58.39,2026-07-01T21:28:17Z
+neo4j,bi-16,mydb,320.110,,6259.90,2026-07-01T23:18:18Z

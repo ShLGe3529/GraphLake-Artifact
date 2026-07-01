@@ -39,7 +39,7 @@ docker network inspect lakehouse-net >/dev/null
 
 echo "======== Step 1: Standard Iceberg ingest (demo.mydb) ========"
 cd "${REPO_ROOT}/dataset"
-./generate_ldbc.sh sf30 
+./generate_ldbc.sh sf100 
 docker compose -f "${REPO_ROOT}/systems/spark/docker-compose.yml" up -d
 sleep 10
 ./run_ingest.sh standard
