@@ -1,8 +1,8 @@
 # GraphLake Artifact
 
-Reproducibility package for **GraphLake** over Iceberg on MinIO. Single machine, Docker, **64 GB RAM** recommended.
+Reproducibility artifact for **GraphLake** over Iceberg on MinIO. 
 
-**Design:** experiment scripts are **flat bash** with `set -ex` — every step is an explicit `echo` + `docker` / `docker compose` command you can copy to a terminal.
+Recommended to run on a single machine with largen than **64 GB RAM**.
 
 ## Layout
 
@@ -37,9 +37,9 @@ Each experiment script runs its own **ingest** (`run_ingest.sh standard` or `par
 
 | Script | What it does |
 |--------|----------------|
-| `experiments/exp0_filter_pushdown_demo.sh` | GraphLake load only; 3 tables; **month** partition on `comment_hascreator_person` only |
-| `experiments/exp1_end_to_end.sh` | BI-16 on GraphLake, PuppyGraph, Trino, Spark, Neo4j |
-| `experiments/exp2_loading_query.sh` | BI-2/5/8/13/16 on GraphLake + PuppyGraph |
+| `experiments/exp0_filter_pushdown_demo.sh` | Demonstrate that GraphLake maps a graph on a constrained partition using **month** filter on `comment_hascreator_person`. The result is verified because GraphLake loads less files compared to an null filter case.|
+| `experiments/exp1_end_to_end.sh` | Demonstrate that GraphLake has less end-to-end execution time (cold run) compared with other systems. The results are verified by calculating end-to-end execution time of 5 systems (GraphLake, PuppyGraph, Trino, Spark, Neo4j) on BI-16. TigerGraph is omitted here due to proprietary licensing |
+| `experiments/exp2_loading_query.sh` | Demonstrate that GraphLake has both lower startup time and query time compared to PuppyGraph. The results are verified by comparing startup time and query time on BI-2/5/8/13/16.|
 | `experiments/run_all.sh` | exp0 → exp1 → exp2 |
 
 ```bash
@@ -58,12 +58,12 @@ Linux, Docker Compose v2, `curl`, `zstd`, `tar`, Python 3 + `neo4j` pip package 
 
 ## Scope of Reproducibility
 
-This artifact provides the source code and execution scripts to evaluate the core design of GraphLake: **Zero-ETL graph execution** and **partition-aware filter pushdown** for **ephemeral BI workloads**. 
+This artifact provides the execution scripts to evaluate the core design of GraphLake.
 
 The provided scripts run a complete validation loop consisting of three core experiments:
-* **Exp0 (Filter Pushdown):** Evaluates the efficiency of leveraging Iceberg metadata for partition pruning during dynamic graph construction.
-* **Exp1 (End-to-End Time):** Measures end-to-end latency on the dynamically constructed topologies using LDBC SNB BI-16.
-* **Exp2 (Loading-Query Time):** Compares the startup and query time of GraphLake against baseline systems.
+* **Exp0 (Filter Pushdown):** Validate the feasibility of leveraging Iceberg metadata for partition pruning during dynamic graph construction.
+* **Exp1 (End-to-End Time):** Measures end-to-end latency using LDBC SNB BI-16 against other systems.
+* **Exp2 (Loading-Query Time):** Compares the startup and query time of GraphLake against PuppyGraph.
 
 ### Omitted Experiments
-The global graph algorithms (Graph500 Scale 22) and multi-node scalability benchmarks evaluated in the paper are omitted from this single-node Docker artifact because Exp0 through Exp2 are sufficient to validate the core technical claims and the Zero-ETL architecture of GraphLake presented in the paper.
+The graph algorithm (Graph500 Scale 22) and multi-node scalability benchmarks evaluated in the paper are omitted from this single-node Docker artifact because Exp0 through Exp2 are sufficient to validate the core technical claims and architecture of GraphLake presented in the paper.
