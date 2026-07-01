@@ -21,11 +21,10 @@ cd /path/to/GraphLake-Artifact
 docker compose up -d
 ```
 
-## Step 2 — LDBC download + Spark (once)
+## Step 2 — Spark (once)
 
 ```bash
 cd dataset
-./generate_ldbc.sh
 docker compose -f ../systems/spark/docker-compose.yml up -d
 cd ..
 ```
