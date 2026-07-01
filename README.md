@@ -1,8 +1,9 @@
 # GraphLake Artifact
 
-Reproducibility artifact for **GraphLake** over Iceberg on MinIO. 
+Reproducibility artifact for **GraphLake** over Iceberg on MinIO. It is recommended to run on a single machine with larger than **64 GB RAM**.
 
-Recommended to run on a single machine with largen than **64 GB RAM**.
+Due to proprietary licensing, the GraphLake runtime is provided as a Docker image shlge3529/graphlake-artifact:latest, and TigerGraph runtime is not included in this artifact.
+
 
 ## Layout
 
@@ -20,8 +21,6 @@ cd /path/to/GraphLake-Artifact
 docker compose up -d
 ```
 
-MinIO: http://localhost:9001 (`admin` / `password`), S3 API http://localhost:19000
-
 ## Step 2 — LDBC download + Spark (once)
 
 ```bash
@@ -31,16 +30,14 @@ docker compose -f ../systems/spark/docker-compose.yml up -d
 cd ..
 ```
 
-Each experiment script runs its own **ingest** (`run_ingest.sh standard` or `partitioned`) when you execute it.
-
 ## Step 3 — Experiments
 
 | Script | What it does |
 |--------|----------------|
 | `experiments/exp0_filter_pushdown_demo.sh` | Demonstrate that GraphLake maps a graph on a constrained partition using **month** filter on `comment_hascreator_person`. The result is verified because GraphLake loads less files compared to an null filter case.|
-| `experiments/exp1_end_to_end.sh` | Demonstrate that GraphLake has less end-to-end execution time (cold run) compared with other systems. The results are verified by calculating end-to-end execution time of 5 systems (GraphLake, PuppyGraph, Trino, Spark, Neo4j) on BI-16. TigerGraph is omitted here due to proprietary licensing |
+| `experiments/exp1_end_to_end.sh` | Demonstrate that GraphLake has less end-to-end execution time (cold run) compared with other systems. The results are verified by calculating end-to-end execution time of 5 systems (GraphLake, PuppyGraph, Trino, Spark, Neo4j) on BI-16. TigerGraph is omitted here due to proprietary licensing. |
 | `experiments/exp2_loading_query.sh` | Demonstrate that GraphLake has both lower startup time and query time compared to PuppyGraph. The results are verified by comparing startup time and query time on BI-2/5/8/13/16.|
-| `experiments/run_all.sh` | exp0 → exp1 → exp2 |
+| `experiments/run_all.sh` | exp0 → exp1 → exp2. |
 
 ```bash
 # Example (use sudo if needed)

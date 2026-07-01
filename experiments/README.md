@@ -1,7 +1,5 @@
 # Experiments
 
-All scripts use **`set -ex`**: fail fast, print every command.
-
 | Script | Ingest inside script | Output |
 |--------|----------------------|--------|
 | `exp0_filter_pushdown_demo.sh` | `run_ingest.sh partitioned-exp0` | `results/exp0/summary.csv` |
